@@ -4,8 +4,8 @@ namespace ConsoleApp1
 {
     class HW1
     {
-        static void Main(string[] args)
-        {
+        //static void Main(string[] args)
+        //{
             //1
             /*
             char tmp;
@@ -96,6 +96,6 @@ namespace ConsoleApp1
             int numberTwo = Convert.ToInt32(tmpStr);
             Console.WriteLine(numberTwo);
             */
-        }
+        //}
     }
 }
