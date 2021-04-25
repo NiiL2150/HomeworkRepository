@@ -8,16 +8,12 @@ namespace ConsoleApp1
         //{
             //1
             /*
-            char tmp;
+            char tmp = ' ';
             int numberOfSpaces = 0;
-            while (true)
+            while (tmp != '.')
             {
                 tmp = Convert.ToChar(Console.Read());
-                if (tmp == '.')
-                {
-                    break;
-                }
-                else if (tmp == ' ')
+                if (tmp == ' ')
                 {
                     numberOfSpaces++;
                 }

@@ -6,31 +6,67 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    struct User
+    class Bank
     {
-        public string name;
-        public int age;
-        public User(string name, int age)
+        public static int balance;
+        public int localBalance;
+        public readonly string birthday;
+
+        public Bank()
         {
-            this.age = age;
-            this.name = name;
+            localBalance = 0;
+            birthday = "31/10/1998";
         }
-        public int IncremAge()
+        public Bank(int localBalance)
         {
-            age++;
-            return age;
+            birthday = "31/10/1998";
+            balance += localBalance;
+            this.localBalance = localBalance;
+        }
+        static Bank()
+        {
+            balance = 10;
+        }
+        public static void AddGeneralBalance(int amount)
+        {
+            balance += amount;
+        }
+        public void AddLocalBalance(int amount)
+        {
+            localBalance += amount;
+            balance += amount;
+        }
+        public void Print()
+        {
+            Console.WriteLine($"Local balance of branch: {localBalance} manat\n" +
+                $"Total balance of all branch: {balance} manat");
+        }
+    }
+    class MyClass
+    {
+        private int age;
+        public int Age { get => age; set => age = value; }
+
+        public MyClass()
+        {
+
+        }
+        public static int Sum(params int[] arr)
+        {
+            int sum = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                sum += arr[i];
+            }
+            return sum;
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            User a;
-            a.age = 5;
-            a.name = "John";
-            Console.WriteLine(a.age);
-            a.IncremAge();
-            Console.WriteLine(a.age);
+            MyClass myClass = new MyClass();
+            Console.WriteLine(MyClass.Sum(1, 2, 3, 4, 5, 6, 7, 8, 9));
         }
     }
 }
