@@ -42,7 +42,7 @@ namespace ConsoleApp1
                 $"Total balance of all branch: {balance} manat");
         }
     }
-    class MyClass
+    partial class MyClass
     {
         private int age;
         public int Age { get => age; set => age = value; }
@@ -63,10 +63,9 @@ namespace ConsoleApp1
     }
     class Program
     {
-        static void Main(string[] args)
+        /*static void Main(string[] args)
         {
-            MyClass myClass = new MyClass();
-            Console.WriteLine(MyClass.Sum(1, 2, 3, 4, 5, 6, 7, 8, 9));
-        }
+
+        }*/
     }
 }
