@@ -54,11 +54,11 @@ namespace ConsoleApp1
         {
             return (this.ToString() == obj.ToString());
         }
-        public static bool operator ==(Point z1, object z2)
+        public static bool operator ==(Point z1, Point z2)
         {
             return (z1.Equals(z2));
         }
-        public static bool operator !=(Point z1, object z2)
+        public static bool operator !=(Point z1, Point z2)
         {
             return !(z1.Equals(z2));
         }
