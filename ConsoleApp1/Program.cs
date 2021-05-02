@@ -30,21 +30,54 @@ namespace ConsoleApp1
         {
             return new Point(z1.X + z2.X, z1.Y + z2.Y);
         }
+        public static Point operator +(Point z2, int pos)
+        {
+            return new Point(pos + z2.X, pos + z2.Y);
+        }
         public static Point operator -(Point z1, Point z2)
         {
             return new Point(z1.X - z2.X, z1.Y - z2.Y);
         }
+        public static Point operator -(Point z2, int pos)
+        {
+            return new Point(z2.X - pos, z2.Y - pos);
+        }
         public override string ToString()
         {
             return $"x = {X} y = {Y}";
+        }
+        public override int GetHashCode()
+        {
+            return this.ToString().GetHashCode();
+        }
+        public override bool Equals(object obj)
+        {
+            return (this.ToString() == obj.ToString());
+        }
+        public static bool operator ==(Point z1, object z2)
+        {
+            return (z1.Equals(z2));
+        }
+        public static bool operator !=(Point z1, object z2)
+        {
+            return !(z1.Equals(z2));
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Point p = new Point(3, 3), p2 = new Point(2, 2);
+            Point p = new Point(3, 3), p2 = new Point(2, 2), p3 = new Point(1, 1);
             Console.WriteLine(p - p2);
+            Console.WriteLine(p + 4);
+            Console.WriteLine(p += 4);
+            Console.WriteLine(p);
+            Console.WriteLine(p -= 6);
+            Console.WriteLine(p);
+            Console.WriteLine(p.Equals(p3));
+            Console.WriteLine(p == p3);
+            Console.WriteLine(p != p3);
+            Console.WriteLine(p == "x = 1 y = 1");
         }
     }
 }
