@@ -100,6 +100,7 @@ namespace ConsoleApp1
     }
     class HW2
     {
+        /*
         static void Main(string[] args)
         {
             SpaceShip spaceShip = new SpaceShip("SpaceX Starship 2020", 2020, "Methane", 3300, 5000);
@@ -134,6 +135,6 @@ namespace ConsoleApp1
             spaceShip.LatestLaunch = spaceShips[3];
             spaceShip.PrintLatestLaunch();
             Console.WriteLine();
-        }
+        }*/
     }
 }

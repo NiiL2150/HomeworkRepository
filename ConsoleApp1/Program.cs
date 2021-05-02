@@ -6,66 +6,45 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Bank
+    class Point
     {
-        public static int balance;
-        public int localBalance;
-        public readonly string birthday;
-
-        public Bank()
+        public int X { get; set; }
+        public int Y { get; set; }
+        public Point()
         {
-            localBalance = 0;
-            birthday = "31/10/1998";
+            X = 0;
+            Y = 0;
         }
-        public Bank(int localBalance)
+        public Point(int x, int y)
         {
-            birthday = "31/10/1998";
-            balance += localBalance;
-            this.localBalance = localBalance;
+            X = x;
+            Y = y;
         }
-        static Bank()
+        public static Point operator ++(Point z)
         {
-            balance = 10;
+            z.X++;
+            z.Y++;
+            return z;
         }
-        public static void AddGeneralBalance(int amount)
+        public static Point operator +(Point z1, Point z2)
         {
-            balance += amount;
+            return new Point(z1.X + z2.X, z1.Y + z2.Y);
         }
-        public void AddLocalBalance(int amount)
+        public static Point operator -(Point z1, Point z2)
         {
-            localBalance += amount;
-            balance += amount;
+            return new Point(z1.X - z2.X, z1.Y - z2.Y);
         }
-        public void Print()
+        public override string ToString()
         {
-            Console.WriteLine($"Local balance of branch: {localBalance} manat\n" +
-                $"Total balance of all branch: {balance} manat");
-        }
-    }
-    partial class MyClass
-    {
-        private int age;
-        public int Age { get => age; set => age = value; }
-
-        public MyClass()
-        {
-
-        }
-        public static int Sum(params int[] arr)
-        {
-            int sum = 0;
-            for (int i = 0; i < arr.Length; i++)
-            {
-                sum += arr[i];
-            }
-            return sum;
+            return $"x = {X} y = {Y}";
         }
     }
     class Program
     {
-        /*static void Main(string[] args)
+        static void Main(string[] args)
         {
-
-        }*/
+            Point p = new Point(3, 3), p2 = new Point(2, 2);
+            Console.WriteLine(p - p2);
+        }
     }
 }
