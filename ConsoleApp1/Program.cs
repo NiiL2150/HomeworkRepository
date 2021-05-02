@@ -63,6 +63,53 @@ namespace ConsoleApp1
             return !(z1.Equals(z2));
         }
     }
+    class City
+    {
+        public string Name { get; set; }
+        public City(string _name)
+        {
+            Name = _name;
+        }
+    }
+    class Country
+    {
+        City[] cities;
+        public int Count { get => cities.Length; }
+        public string Name { get; set; }
+        public Country(string name, int count)
+        {
+            Name = name;
+            cities = new City[count];
+        }
+        public City this[int index]
+        {
+            get
+            {
+                return cities[index];
+            }
+            set
+            {
+                cities[index] = value;
+            }
+        }
+        public static explicit operator string(Country c)
+        {
+            return c.Name;
+        }
+        public static implicit operator Country(string s)
+        {
+            return new Country(s, 0);
+        }
+        public override string ToString()
+        {
+            string tmpStr = $"=========={Name}==========\n";
+            for (int i = 0; i < cities.Length; i++)
+            {
+                tmpStr += $"{i + 1}. {cities[i].Name}\n";
+            }
+            return tmpStr;
+        }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -78,6 +125,16 @@ namespace ConsoleApp1
             Console.WriteLine(p == p3);
             Console.WriteLine(p != p3);
             Console.WriteLine(p.Equals("x = 1 y = 1"));
+
+            System.Threading.Thread.Sleep(1000);
+            Console.Clear();
+
+            Country country = new Country("Azerbaijan", 4);
+            country[0] = new City("Baku");
+            country[1] = new City("Ganja");
+            country[2] = new City("Sumgait");
+            country[3] = new City("Shamahi");
+            Console.WriteLine(country);
         }
     }
 }
