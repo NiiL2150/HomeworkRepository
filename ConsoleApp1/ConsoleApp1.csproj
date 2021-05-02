@@ -48,6 +48,11 @@
     <Compile Include="HW2partial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleClasses1\Emloyee.cs" />
+    <Compile Include="SampleClasses1\Interfaces\IManaging.cs" />
+    <Compile Include="SampleClasses1\Interfaces\IWorking.cs" />
+    <Compile Include="SampleClasses1\Manager.cs" />
+    <Compile Include="SampleClasses1\Worker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
