@@ -77,7 +77,7 @@ namespace ConsoleApp1
             Console.WriteLine(p.Equals(p3));
             Console.WriteLine(p == p3);
             Console.WriteLine(p != p3);
-            Console.WriteLine(p == "x = 1 y = 1");
+            Console.WriteLine(p.Equals("x = 1 y = 1"));
         }
     }
 }
