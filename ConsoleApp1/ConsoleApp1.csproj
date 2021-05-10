@@ -46,6 +46,7 @@
     <Compile Include="HW1.cs" />
     <Compile Include="HW2.cs" />
     <Compile Include="HW2partial.cs" />
+    <Compile Include="HW3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleClasses1\Emloyee.cs" />

@@ -23,7 +23,7 @@ namespace ConsoleApp1
     }
     class Program
     {
-        static void Main(string[] args)
+        /*static void Main(string[] args)
         {
             List<int> list = new List<int> { 1, 2, 3, 4, 5 };
             ArrayList arrayList = new ArrayList { 1, 2, 3, "List" };
@@ -66,6 +66,6 @@ namespace ConsoleApp1
             {
                 Console.WriteLine(item.Key + " - " + item.Value);
             }
-        }
+        }*/
     }
 }
