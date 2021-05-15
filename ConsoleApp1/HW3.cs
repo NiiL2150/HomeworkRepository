@@ -153,7 +153,7 @@ namespace ConsoleApp1
     }
     class HW3
     {
-        static void Main(string[] args)
+        /*static void Main(string[] args)
         {
             Battle battle = new Battle();
             battle.PrintT34();
@@ -161,6 +161,6 @@ namespace ConsoleApp1
             battle.PrintPantera();
             Console.ReadKey();
             battle.PrintResult();
-        }
+        }*/
     }
 }
