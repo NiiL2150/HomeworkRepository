@@ -323,7 +323,7 @@ namespace ConsoleApp1
     }
     class HW5
     {
-        static void Main(string[] args)
+        /*static void Main(string[] args)
         {
             int quantity = Int32.Parse(Console.ReadLine());
             Team team = new Team(quantity, null);
@@ -386,6 +386,6 @@ namespace ConsoleApp1
                 home[10].ClearWorkers();
             }
             Console.Write($"House built!");
-        }
+        }*/
     }
 }

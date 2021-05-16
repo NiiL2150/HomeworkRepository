@@ -4,68 +4,93 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using System.Windows.Forms;
 using ConsoleApp1.SampleClasses1;
 using ConsoleApp1.SampleClasses1.Interfaces;
 
 namespace ConsoleApp1
 {
-    class Bank<T>
+    class GCHelper
     {
-        public T BankNumber { get; set; }
-        public Bank(T bankNumber)
+        public void MakeGarbage()
         {
-            BankNumber = bankNumber;
+            Console.WriteLine("Making garbage");
+            for (int i = 0; i < 10; i++)
+            {
+                Person p = new Person();
+            }
         }
-        public override string ToString()
+        class Person
         {
-            return $"{BankNumber}";
+            string name;
+            int age;
         }
     }
+
+    class FinilizeExample
+    {
+        int id;
+        public FinilizeExample(int id)
+        {
+            this.id = id;
+        }
+        ~FinilizeExample()
+        {
+            Console.WriteLine($"Finilize! {id}");
+        }
+    }
+
+    class DisposeExample : IDisposable
+    {
+        bool isDisposed = false;
+
+        void Clearing(bool disposing)
+        {
+            if (!isDisposed)
+            {
+                if (disposing)
+                {
+                    Console.WriteLine("Clear managed resources");
+                }
+                Console.WriteLine("Clear unmanaged resources");
+            }
+            isDisposed = true;
+        }
+        public void Dispose()
+        {
+            Clearing(true);
+            GC.SuppressFinalize(this);
+        }
+        public void DoSome()
+        {
+            Console.WriteLine("Do some");
+        }
+        ~DisposeExample()
+        {
+            Clearing(false);
+        }
+    }
+
     class Program
     {
-        /*static void Main(string[] args)
+        static void Main(string[] args)
         {
-            List<int> list = new List<int> { 1, 2, 3, 4, 5 };
-            ArrayList arrayList = new ArrayList { 1, 2, 3, "List" };
-            LinkedList<int> vs = new LinkedList<int>();
-            vs.AddLast(1);
-            vs.AddLast(2);
-            vs.AddLast(3);
-            foreach (var item in list)
+            using(DisposeExample dispose = new DisposeExample())
             {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine();
-            foreach (var item in arrayList)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine();
-            foreach (var item in vs)
-            {
-                Console.WriteLine(item);
+                dispose.DoSome();
             }
 
-            Hashtable hashtable = new Hashtable();
-            hashtable.Add(1, "Kanan");
-            hashtable.Add(5.12f, "Nurana");
-            hashtable.Add('c', "Rashvin");
-            Console.WriteLine();
-
-            Dictionary<string, int> kV = new Dictionary<string, int>();
-            kV.Add("Javid", 10);
-            kV.Add("Kanan", 25);
-            Console.WriteLine("Keys");
-            foreach (var item in kV.Keys)
+            int a = 5;
+            int b = Int32.Parse(Console.ReadLine());
+            try
             {
-                Console.WriteLine(item);
+                Console.WriteLine(a / b);
             }
-            Console.WriteLine();
-            Console.WriteLine("Dictionary");
-            foreach (var item in kV)
+            catch (Exception)
             {
-                Console.WriteLine(item.Key + " - " + item.Value);
+                
+                throw;
             }
-        }*/
+        }
     }
 }
