@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Windows.Forms;
+using System.Windows.Forms;
 using ConsoleApp1.SampleClasses1;
 using ConsoleApp1.SampleClasses1.Interfaces;
 
@@ -73,24 +73,25 @@ namespace ConsoleApp1
 
     class Program
     {
-        static void Main(string[] args)
+        /*static void Main(string[] args)
         {
-            using(DisposeExample dispose = new DisposeExample())
-            {
-                dispose.DoSome();
-            }
-
-            int a = 5;
+            int a = 2;
             int b = Int32.Parse(Console.ReadLine());
             try
             {
+                //a = a / b;
                 Console.WriteLine(a / b);
             }
-            catch (Exception)
+
+            catch (DivideByZeroException ex)
             {
-                
-                throw;
+                Console.WriteLine($"a = {a} b = {b}  Exception data:{ex.Message} \n exception stack trace: \n {ex.StackTrace}");
+                MessageBox.Show("Connection lost unhandled exception something went wrong", "Divizion by zero", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("!!!!!!!!!!!" + ex.Message);
+            }
+        }*/
     }
 }
