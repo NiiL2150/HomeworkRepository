@@ -239,6 +239,7 @@ namespace ConsoleApp1
     }
     class HW4
     {
+        /*
         static void Main(string[] args)
         {
             try
@@ -509,6 +510,6 @@ namespace ConsoleApp1
                 Console.WriteLine(exception);
                 Console.ReadKey();
             }
-        }
+        }*/
     }
 }

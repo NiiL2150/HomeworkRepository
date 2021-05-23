@@ -5,93 +5,85 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ConsoleApp1.SampleClasses1;
-using ConsoleApp1.SampleClasses1.Interfaces;
 
 namespace ConsoleApp1
 {
-    class GCHelper
+    public class PropertyEventArgs<T>
     {
-        public void MakeGarbage()
+        public string propName;
+        public bool isSuccess;
+        public T value;
+        static public int changeCount;
+        static public int successfulCount;
+        public PropertyEventArgs(string name, bool success, T value)
         {
-            Console.WriteLine("Making garbage");
-            for (int i = 0; i < 10; i++)
+            this.value = value;
+            propName = name;
+            isSuccess = success;
+            changeCount++;
+            if (success)
             {
-                Person p = new Person();
+                successfulCount++;
             }
         }
-        class Person
-        {
-            string name;
-            int age;
-        }
     }
-
-    class FinilizeExample
+    public delegate void PropertyEventHandler(object sender, PropertyEventArgs<int> e);
+    interface IPropertyChanged
     {
-        int id;
-        public FinilizeExample(int id)
-        {
-            this.id = id;
-        }
-        ~FinilizeExample()
-        {
-            Console.WriteLine($"Finilize! {id}");
-        }
+        event PropertyEventHandler PropertyChanged;
     }
-
-    class DisposeExample : IDisposable
+    class MyClass : IPropertyChanged
     {
-        bool isDisposed = false;
-
-        void Clearing(bool disposing)
+        public event PropertyEventHandler PropertyChanged;
+        private int myInt;
+        public int MyProperty
         {
-            if (!isDisposed)
+            get
             {
-                if (disposing)
-                {
-                    Console.WriteLine("Clear managed resources");
-                }
-                Console.WriteLine("Clear unmanaged resources");
+                return myInt;
             }
-            isDisposed = true;
-        }
-        public void Dispose()
-        {
-            Clearing(true);
-            GC.SuppressFinalize(this);
-        }
-        public void DoSome()
-        {
-            Console.WriteLine("Do some");
-        }
-        ~DisposeExample()
-        {
-            Clearing(false);
+            set
+            {
+                    try
+                    {
+                        if (value < 0)
+                        {
+                            throw new Exception();
+                        }
+                        myInt = value;
+                        PropertyChanged?.Invoke(this, new PropertyEventArgs<int>("myInt", true, value));
+                    }
+                    catch (Exception)
+                    {
+                        PropertyChanged?.Invoke(this, new PropertyEventArgs<int>("myInt", false, value));
+                    }
+            }
         }
     }
-
     class Program
     {
-        /*static void Main(string[] args)
+        static void Main(string[] args)
         {
-            int a = 2;
-            int b = Int32.Parse(Console.ReadLine());
-            try
-            {
-                //a = a / b;
-                Console.WriteLine(a / b);
-            }
+            MyClass myClass = new MyClass();
+            myClass.PropertyChanged += ConsolePrint;
+            myClass.MyProperty = 1;
+            myClass.MyProperty = 5;
+            myClass.MyProperty = -5;
+        }
 
-            catch (DivideByZeroException ex)
+        static void ConsolePrint(object sender, PropertyEventArgs<int> e)
+        {
+            if (e.isSuccess)
             {
-                Console.WriteLine($"a = {a} b = {b}  Exception data:{ex.Message} \n exception stack trace: \n {ex.StackTrace}");
-                MessageBox.Show("Connection lost unhandled exception something went wrong", "Divizion by zero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{e.propName} changed for the (successful) {PropertyEventArgs<int>.successfulCount}/{PropertyEventArgs<int>.changeCount} (all) time to {e.value} in my class.");
             }
-            catch (ArgumentException ex)
+            else
             {
-                Console.WriteLine("!!!!!!!!!!!" + ex.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{e.propName} tried to be changed for the (successful) {PropertyEventArgs<int>.successfulCount}/{PropertyEventArgs<int>.changeCount} (all) time from {(sender as MyClass).MyProperty} to {e.value} in my class.");
             }
-        }*/
+            Console.ResetColor();
+        }
     }
 }
