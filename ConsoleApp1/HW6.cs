@@ -189,6 +189,7 @@ namespace ConsoleApp1
 
     class HW6
     {
+        /*
         static void Main(string[] args)
         {
             Car.Notify += ConsoleOutputForCar;
@@ -219,5 +220,6 @@ namespace ConsoleApp1
         {
             MessageBox.Show(e.Message, e.Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        */
     }
 }

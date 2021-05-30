@@ -5,90 +5,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
+using System.Xml;
 
 namespace ConsoleApp1
 {
-    public class PropertyEventArgs<T>
-    {
-        public string propName;
-        public bool isSuccess;
-        public T value;
-        static public int changeCount;
-        static public int successfulCount;
-        public PropertyEventArgs(string name, bool success, T value)
-        {
-            this.value = value;
-            propName = name;
-            isSuccess = success;
-            changeCount++;
-            if (success)
-            {
-                successfulCount++;
-            }
-        }
-    }
-    public delegate void PropertyEventHandler(object sender, PropertyEventArgs<int> e);
-    interface IPropertyChanged
-    {
-        event PropertyEventHandler PropertyChanged;
-    }
-    class MyClass : IPropertyChanged
-    {
-        public event PropertyEventHandler PropertyChanged;
-        private int myInt;
-        public int MyProperty
-        {
-            get
-            {
-                return myInt;
-            }
-            set
-            {
-                    try
-                    {
-                        if (value < 0)
-                        {
-                            throw new Exception();
-                        }
-                        myInt = value;
-                        PropertyChanged?.Invoke(this, new PropertyEventArgs<int>("myInt", true, value));
-                    }
-                    catch (Exception)
-                    {
-                        PropertyChanged?.Invoke(this, new PropertyEventArgs<int>("myInt", false, value));
-                    }
-            }
-        }
-    }
-
     class Program
     {
-        /*
         static void Main(string[] args)
         {
-            MyClass myClass = new MyClass();
-            myClass.PropertyChanged += ConsolePrint;
-            myClass.MyProperty = 1;
-            myClass.MyProperty = 5;
-            myClass.MyProperty = -5;
-        }
-        */
+            XmlTextWriter xmlWriter = null;
+            try
+            {
+                xmlWriter = new XmlTextWriter("Some.xml", Encoding.Unicode);
+                xmlWriter.Formatting = Formatting.Indented;
+                xmlWriter.WriteStartDocument();
 
-        static void ConsolePrint(object sender, PropertyEventArgs<int> e)
-        {
-            if (e.isSuccess)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{e.propName} changed for the (successful) {PropertyEventArgs<int>.successfulCount}/{PropertyEventArgs<int>.changeCount} (all) time to {e.value} in my class.");
+                xmlWriter.WriteStartElement("users");
+                
+                xmlWriter.WriteStartElement("user");
+                xmlWriter.WriteAttributeString("Type", "Human");
+                xmlWriter.WriteStartElement("name");
+                xmlWriter.WriteString("Dmitry");
+
+                xmlWriter.WriteEndElement();
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("user");
+                xmlWriter.WriteAttributeString("Type", "Alien");
+                xmlWriter.WriteStartElement("name");
+                xmlWriter.WriteString("Nail");
+
+                xmlWriter.WriteEndDocument();
+                Console.WriteLine("XML Created");
             }
-            else
+            catch(Exception e)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"{e.propName} tried to be changed for the (successful) {PropertyEventArgs<int>.successfulCount}/{PropertyEventArgs<int>.changeCount} (all) time from {(sender as MyClass).MyProperty} to {e.value} in my class.");
+                Console.WriteLine($"XML Error: {e.Message}");
             }
-            Console.ResetColor();
+            finally
+            {
+
+            }
         }
     }
 }
