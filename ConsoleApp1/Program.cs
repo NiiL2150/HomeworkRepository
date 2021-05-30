@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace ConsoleApp1
 {
     public class PropertyEventArgs<T>
@@ -60,8 +62,10 @@ namespace ConsoleApp1
             }
         }
     }
+
     class Program
     {
+        /*
         static void Main(string[] args)
         {
             MyClass myClass = new MyClass();
@@ -70,6 +74,7 @@ namespace ConsoleApp1
             myClass.MyProperty = 5;
             myClass.MyProperty = -5;
         }
+        */
 
         static void ConsolePrint(object sender, PropertyEventArgs<int> e)
         {
