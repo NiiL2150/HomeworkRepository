@@ -63,7 +63,7 @@ namespace ConsoleApp1
                 xmlWriter.WriteStartElement("Code");
 
                 xmlWriter.WriteAttributeString("Language", "CSharp");
-                xmlWriter.WriteString($"<![CDATA[{command}]]>");
+                xmlWriter.WriteCData(command);
 
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndElement();
